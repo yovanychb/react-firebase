@@ -54,7 +54,7 @@ class Edit extends Component {
         description: '',
         author: ''
       });
-      this.props.history.push("/detail/"+this.props.match.params.id)
+      this.props.history.push("/")
     })
     .catch((error) => {
       console.error("Error adding document: ", error);
