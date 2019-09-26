@@ -1,10 +1,9 @@
 import * as firebase from 'firebase';
-import firestore from 'firebase/firestore'
 
 const settings = { timestampsInSnapshots: true };
 
 
-const firebaseConfig = {
+const config = {
     apiKey: "AIzaSyBvTUvLTTAwD_BE50tAskxgElGTtM47-e8",
     authDomain: "crud-fa9fc.firebaseapp.com",
     databaseURL: "https://crud-fa9fc.firebaseio.com",
@@ -14,6 +13,7 @@ const firebaseConfig = {
     appId: "1:234351547227:web:d8be9a3ba9a3ae2e1e007e",
     measurementId: "G-D7CZ0DYCE1"
 };
+
 
 firebase.initializeApp(config);
 
