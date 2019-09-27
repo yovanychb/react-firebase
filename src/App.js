@@ -1,10 +1,24 @@
 import React from 'react';
-import Inicio from './crud/inicio';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Inicio />
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }

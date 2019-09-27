@@ -2,21 +2,17 @@ import * as firebase from 'firebase';
 
 const settings = { timestampsInSnapshots: true };
 
-
-const config = {
-    apiKey: "AIzaSyBvTUvLTTAwD_BE50tAskxgElGTtM47-e8",
-    authDomain: "crud-fa9fc.firebaseapp.com",
-    databaseURL: "https://crud-fa9fc.firebaseio.com",
-    projectId: "crud-fa9fc",
-    storageBucket: "crud-fa9fc.appspot.com",
-    messagingSenderId: "234351547227",
-    appId: "1:234351547227:web:d8be9a3ba9a3ae2e1e007e",
-    measurementId: "G-D7CZ0DYCE1"
+var firebaseConfig = {
+    apiKey: "AIzaSyCqusw9wlQkBp2lk2x8I1d3PotuDZHki-U",
+    authDomain: "crud-11025.firebaseapp.com",
+    databaseURL: "https://crud-11025.firebaseio.com",
+    projectId: "crud-11025",
+    storageBucket: "crud-11025.appspot.com",
+    messagingSenderId: "572397289903",
+    appId: "1:572397289903:web:8bdaff51dee64ff8212f5a"
 };
-
-
-firebase.initializeApp(config);
-
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings(settings);
 
 export default firebase;

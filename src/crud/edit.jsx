@@ -8,25 +8,25 @@ class Edit extends Component {
     super(props);
     this.state = {
       key: '',
-      title: '',
-      description: '',
-      author: ''
+      nombre: '',
+      descripcion: '',
+      precio: ''
     };
   }
 
   componentDidMount() {
-    const ref = firebase.firestore().collection('boards').doc(this.props.match.params.id);
+    const ref = firebase.firestore().collection('productos').doc(this.props.match.params.id);
     ref.get().then((doc) => {
       if (doc.exists) {
-        const board = doc.data();
+        const producto = doc.data();
         this.setState({
           key: doc.id,
-          title: board.title,
-          description: board.description,
-          author: board.author
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precio: producto.precio
         });
       } else {
-        console.log("No such document!");
+        console.log("Fallo al obtener el registro");
       }
     });
   }
@@ -34,30 +34,28 @@ class Edit extends Component {
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
-    this.setState({board:state});
+    this.setState({producto:state});
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-
-    const { title, description, author } = this.state;
-
-    const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
+    const { nombre, descripcion, precio } = this.state;
+    const updateRef = firebase.firestore().collection('productos').doc(this.state.key);
     updateRef.set({
-      title,
-      description,
-      author
+      nombre,
+      descripcion,
+      precio
     }).then((docRef) => {
       this.setState({
         key: '',
-        title: '',
-        description: '',
-        author: ''
+        nombre: '',
+        descripcion: '',
+        precio: ''
       });
       this.props.history.push("/")
     })
     .catch((error) => {
-      console.error("Error adding document: ", error);
+      console.error("Error al actualizar: ", error);
     });
   }
 
@@ -66,23 +64,23 @@ class Edit extends Component {
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <h3 className="panel-title">
+            <h3 className="panel-nombre">
               Editar Pelicula
             </h3>
           </div>
           <div className="panel-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label for="title">Title:</label>
-                <input type="text" className="form-control" name="title" value={this.state.title} onChange={this.onChange} placeholder="Title" />
+                <label for="nombre">Nombre:</label>
+                <input type="text" className="form-control" name="nombre" value={this.state.nombre} onChange={this.onChange} placeholder="Nombre" />
               </div>
               <div className="form-group">
-                <label for="description">Description:</label>
-                <textArea type="text" className="form-control" name="description" value={this.state.description} onChange={this.onChange} placeholder="Description" />
+                <label for="descripcion">Descripcion:</label>
+                <textArea type="text" className="form-control" name="Descripcion" value={this.state.descripcion} onChange={this.onChange} placeholder="Descripcion" />
               </div>
               <div className="form-group">
-                <label for="author">Author:</label>
-                <input type="text" className="form-control" name="author" value={this.state.author} onChange={this.onChange} placeholder="Author" />
+                <label for="precio">Precio:</label>
+                <input type="number" className="form-control" name="precio" value={this.state.precio} onChange={this.onChange} placeholder="Precio" />
               </div>
               <button type="submit" className="btn btn-success">Guardar</button>
               <span>  </span>

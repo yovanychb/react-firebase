@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import firebase from '../firebase';
 import { Link } from 'react-router-dom';
 
-class Add extends Component {
+export default class Add extends Component {
 
   constructor() {
     super();
-    this.ref = firebase.firestore().collection('boards');
+    this.ref = firebase.firestore().collection('productos');
     this.state = {
-      title: '',
-      description: '',
-      author: ''
+      nombre: '',
+      descripcion: '',
+      precio: ''
     };
   }
+
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
@@ -21,49 +22,50 @@ class Add extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-
-    const { title, description, author } = this.state;
-
+    const { nombre, descripcion, precio } = this.state;
     this.ref.add({
-      title,
-      description,
-      author
+      nombre,
+      descripcion,
+      precio
     }).then((docRef) => {
       this.setState({
-        title: '',
-        description: '',
-        author: ''
+        nombre: '',
+        descripcion: '',
+        precio: ''
       });
       this.props.history.push("/")
     })
-    .catch((error) => {
-      console.error("Error adding document: ", error);
-    });
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
   }
 
   render() {
-    const { title, description, author } = this.state;
+    const { nombre, descripcion, precio } = this.state;
     return (
       <div className="container">
         <div className="panel panel-default">
           <div className="panel-heading">
-            <h3 className="panel-title">
-              Agregar Pelicula
+            <h3 className="panel-nombre">
+              Agregar Producto
             </h3>
           </div>
           <div className="panel-body">
-             <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <label for="title">Title:</label>
-                <input type="text" className="form-control" name="title" value={title} onChange={this.onChange} placeholder="Title" />
+                <label for="nombre">Nombre:</label>
+                <input type="text" className="form-control" name="nombre" value={nombre}
+                  onChange={this.onChange} placeholder="Nombre" required />
               </div>
               <div className="form-group">
-                <label for="description">Description:</label>
-                <textArea className="form-control" name="description" onChange={this.onChange} placeholder="Description" cols="80" rows="3">{description}</textArea>
+                <label for="descripcion">Descripcion:</label>
+                <textArea className="form-control" name="descripcion" onChange={this.onChange}
+                  placeholder="Descripcion" cols="80" rows="3" required>{descripcion}</textArea>
               </div>
               <div className="form-group">
-                <label for="author">Author:</label>
-                <input type="text" className="form-control" name="author" value={author} onChange={this.onChange} placeholder="Author" />
+                <label for="precio">Precio:</label>
+                <input type="number" className="form-control" name="precio" value={precio}
+                  onChange={this.onChange} placeholder="0.0" required />
               </div>
               <button type="submit" className="btn btn-success">Agregar</button>
               <span>  </span>
@@ -75,5 +77,3 @@ class Add extends Component {
     );
   }
 }
-
-export default Add;
